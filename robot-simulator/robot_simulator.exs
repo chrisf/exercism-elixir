@@ -45,11 +45,7 @@ defmodule RobotSimulator do
     |> Enum.reduce(robot, &simulate_instruction(&2, &1))
   end
 
-  defguard is_map?(ds)
-           when is_map(ds)
-
-  @spec simulate_instruction(Robot.t(), String.t()) :: boolean
-  defp simulate_instruction(robot, instruction) when is_map?(robot) do
+  defp simulate_instruction(%Robot{} = robot, instruction) do
     case instruction do
       "L" -> turn(robot, "L")
       "R" -> turn(robot, "R")
@@ -58,9 +54,7 @@ defmodule RobotSimulator do
     end
   end
 
-  defp simulate_instruction({:error, "invalid instruction"}, _) do
-    {:error, "invalid instruction"}
-  end
+  defp simulate_instruction({:error, "invalid instruction"} = error, _), do: error
 
   @doc """
   Return the robot's direction.
