@@ -16,12 +16,7 @@ defmodule NucleotideCount do
   def count('', _), do: 0
 
   def count(strand, nucleotide) do
-    nucleotide = [nucleotide] |> to_string
-
-    strand
-    |> to_string
-    |> String.split("", trim: true)
-    |> Enum.reduce(0, fn el, acc -> if el == nucleotide, do: acc + 1, else: acc end)
+    Enum.count(strand, &(&1 == nucleotide))
   end
 
   @doc """
