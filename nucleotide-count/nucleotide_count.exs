@@ -34,8 +34,6 @@ defmodule NucleotideCount do
   """
   @spec histogram([char]) :: map
 
-  def histogram(''), do: %{?A => 0, ?T => 0, ?C => 0, ?G => 0}
-
   def histogram(strand) do
     results = %{?A => 0, ?T => 0, ?C => 0, ?G => 0}
     results = %{results | ?A => count(strand, ?A)}
